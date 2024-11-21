@@ -1,0 +1,3 @@
+*.json
+__pycache__/
+uploaded_text.txt
