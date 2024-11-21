@@ -1,0 +1,18 @@
+# Chat avec RAG (Retrieval-Augmented Generation)
+
+Ce projet implémente un système de chat basé sur la technique **RAG (Retrieval-Augmented Generation)** en utilisant des documents stockés dans un service cloud (Amazon S3). Il permet de comparer les réponses générées par un LLM avec et sans l'augmentation contextuelle des documents. Une interface utilisateur est fournie pour tester différents paramètres, notamment la température.
+
+---
+
+## Fonctionnalités
+
+- **Récupération de documents depuis AWS S3** : Les documents sont récupérés depuis un bucket S3 (formats supportés : `.txt`, `.pdf`).
+- **Création d'un index vectoriel** : Les documents récupérés sont convertis en vecteurs pour des requêtes contextuelles.
+- **Mode sans RAG** : Le modèle génère une réponse uniquement en utilisant ses connaissances préentraînées.
+- **Mode avec RAG** : Le modèle utilise les documents récupérés pour augmenter ses réponses.
+- **Personnalisation de la température** : Ajustez la créativité des réponses générées.
+- **Interface utilisateur** : Basée sur **Streamlit**, pour faciliter les tests.
+
+---
+
+## Prérequis
