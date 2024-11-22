@@ -21,6 +21,10 @@ def query_with_rag(question, temperature, cloud_file_name):
         # Télécharge le fichier depuis Google Cloud Storage
         download_file_from_gcs(cloud_file_name, local_file_path)
 
+        # Vérifier la taille du fichier (éviter les contextes trop longs)
+        max_file_size = 5 * 1024 * 1024  # 5 MB
+        if os.path.getsize(local_file_path) > max_file_size:
+            return "Erreur : Le fichier est trop volumineux pour être utilisé comme contexte."
 
         # Charge le contenu du fichier
         with open(local_file_path, "r", encoding="utf-8", errors="replace") as f:
