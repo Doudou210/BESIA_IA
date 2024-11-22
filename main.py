@@ -4,7 +4,7 @@ from app.pdf_processor import process_pdf_to_text
 from app.rag_engine import query_with_rag, query_without_rag
 
 # Titre de l'application
-st.title("Chat RAG avec Google Cloud")
+st.title("Chat RAG avec BESIA_IA")
 
 # Initialiser les variables globales
 cloud_file_name = None

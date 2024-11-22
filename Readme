@@ -70,7 +70,7 @@ BESIA_IA/
    git clone https://github.com/Doudou210/BESIA_IA.git
    cd BESIA_IA
    ```
-2. Créez un bucket sur **Google Cloud Storage** et configurez vos identifiants (`gcloud_config.json`).
+2. Créez un bucket sur **Google Cloud Storage** et configurez vos identifiants (`gcloud_config.json`) et placer le fichier à la racine du projet.
 
 3. Installez les dépendances :
    ```bash
