@@ -1,18 +1,128 @@
-# Chat avec RAG (Retrieval-Augmented Generation)
 
-Ce projet implémente un système de chat basé sur la technique **RAG (Retrieval-Augmented Generation)** en utilisant des documents stockés dans un service cloud (Amazon S3). Il permet de comparer les réponses générées par un LLM avec et sans l'augmentation contextuelle des documents. Une interface utilisateur est fournie pour tester différents paramètres, notamment la température.
+# BESIA_IA Project
+
+## Description
+**BESIA_IA** est un projet conçu pour le traitement de fichiers PDF et la génération de réponses augmentées par récupération (RAG - Retrieval-Augmented Generation). 
+Il utilise des services cloud (Google Cloud), des techniques d'intelligence artificielle, et des outils spécifiques pour traiter et analyser des documents.
 
 ---
 
 ## Fonctionnalités
 
-- **Récupération de documents depuis AWS S3** : Les documents sont récupérés depuis un bucket S3 (formats supportés : `.txt`, `.pdf`).
-- **Création d'un index vectoriel** : Les documents récupérés sont convertis en vecteurs pour des requêtes contextuelles.
-- **Mode sans RAG** : Le modèle génère une réponse uniquement en utilisant ses connaissances préentraînées.
-- **Mode avec RAG** : Le modèle utilise les documents récupérés pour augmenter ses réponses.
-- **Personnalisation de la température** : Ajustez la créativité des réponses générées.
-- **Interface utilisateur** : Basée sur **Streamlit**, pour faciliter les tests.
+- **Récupération de documents depuis Google Cloud Storage** : Les fichiers PDF téléchargés sont envoyés et récupérés depuis un bucket cloud.
+- **Mode sans RAG** : Réponses générées par le modèle uniquement sur la base de ses connaissances internes.
+- **Mode avec RAG** : Utilisation des documents téléchargés pour augmenter la pertinence des réponses.
+- **Personnalisation de la température** : Réglez la créativité des réponses via un paramètre interactif.
+- **Conversion PDF vers texte** : Les fichiers PDF sont convertis en fichiers texte avant d’être analysés.
+- **Interface utilisateur avec Streamlit** : Une interface simple pour poser des questions, uploader des fichiers et ajuster les paramètres.
 
 ---
 
 ## Prérequis
+
+### Outils et technologies nécessaires
+
+1. **Langages et frameworks** :
+   - Python 3.10 ou supérieur
+   - Streamlit pour l'interface utilisateur
+
+2. **Services Cloud** :
+   - Google Cloud Storage (GCS) pour stocker les fichiers.
+
+3. **Modèle de langage** :
+   - Ollama (ou tout autre LLM local ou basé sur une API).
+
+4. **Bibliothèques Python** :
+   - `streamlit`
+   - `google-cloud-storage`
+   - `PyPDF2`
+   - `requests`
+   
+---
+
+## Structure du projet
+```plaintext
+BESIA_IA/
+├── main.py                  # Point d'entrée du projet
+├── requirements.txt         # Dépendances Python nécessaires
+├── gcloud_config.json       # Fichier de configuration pour Google Cloud
+├── downloaded_context.txt   # Contexte téléchargé pour le traitement
+├── processed_text.txt       # Résultats des textes traités
+├── app/
+│   ├── gcloud_utils.py      # Utilitaires pour Google Cloud
+│   ├── ollama_interface.py  # Interface pour Ollama
+│   ├── pdf_processor.py     # Traitement de fichiers PDF
+│   ├── rag_engine.py        # Implémentation de RAG
+└── __pycache__/             # Fichiers Python compilés
+```
+
+---
+
+## Installation
+
+### Prérequis
+- Python 3.10 ou plus récent
+- Une configuration Google Cloud valide (fichier `gcloud_config.json`)
+
+### Étapes
+1. Clonez le projet :
+   ```bash
+   git clone https://github.com/Doudou210/BESIA_IA.git
+   cd BESIA_IA
+   ```
+2. Créez un bucket sur **Google Cloud Storage** et configurez vos identifiants (`gcloud_config.json`).
+
+3. Installez les dépendances :
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. Assurez-vous que le serveur du modèle LLM (comme Ollama) est lancé localement :
+   ```bash
+   ollama serve
+   ```
+
+5. Lancez le projet :
+   ```bash
+   python main.py
+   ```
+
+---
+
+## Utilisation
+1. **Lancement de l'application** :
+   - Lancez l'application Streamlit :
+     ```bash
+     streamlit run main.py
+     ```
+   - Accédez à l'interface via `http://localhost:8501`.
+
+2. **Upload d’un fichier** :
+   - Téléchargez un fichier PDF depuis l’interface.
+   - Le fichier est automatiquement converti en texte et uploadé vers Google Cloud Storage.
+
+3. **Posez une question** :
+   - Entrez une question dans le champ de texte.
+   - Comparez les réponses générées :
+     - **Sans RAG** : Le modèle répond sans contexte.
+     - **Avec RAG** : Le modèle utilise le contenu du fichier pour générer une réponse.
+
+4. **Ajustez la température** :
+   - Utilisez le slider pour contrôler la créativité des réponses.
+
+---
+
+## Améliorations futures
+
+- Ajouter la prise en charge d'autres formats de documents (ex. : Word, Markdown).
+- Implémenter un mécanisme de recherche avancée dans les documents (via vecteurs ou moteurs de recherche).
+- Ajouter une interface d'administration pour gérer les documents uploadés.
+
+---
+
+## Auteurs
+
+- Nom : **DOUMBIA Siaka Koudou**
+- Contact : siakakoudou.doumbia@yahoo.com  
+- Nom : **KUICHEU Berol**
+- Contact : berolbertindjomo@gmail.com 
