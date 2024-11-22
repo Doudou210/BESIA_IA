@@ -2,19 +2,13 @@ from app.gcloud_utils import download_file_from_gcs
 from app.ollama_interface import query_llm
 import os
 def query_without_rag(question, temperature):
-    """
-    Pose une question au LLM sans utiliser le contexte.
-    """
+    
+    # Pose une question au LLM sans utiliser le contexte.
+    
     return query_llm(question, temperature)
 
 def query_with_rag(question, temperature, cloud_file_name):
-    """
-    Pose une question au LLM en ajoutant le contexte extrait d'un document stocké dans le cloud.
-    :param question: La question posée par l'utilisateur
-    :param temperature: La température du modèle
-    :param cloud_file_name: Le nom du fichier texte ou PDF stocké dans Google Cloud Storage
-    :return: Réponse générée par le LLM avec contexte
-    """
+   
     local_file_path = "downloaded_context.txt"
 
     try:
@@ -22,11 +16,11 @@ def query_with_rag(question, temperature, cloud_file_name):
         download_file_from_gcs(cloud_file_name, local_file_path)
 
         # Vérifier la taille du fichier (éviter les contextes trop longs)
-        max_file_size = 5 * 1024 * 1024  # 5 MB
+        max_file_size = 5 * 1024 * 1024  
         if os.path.getsize(local_file_path) > max_file_size:
             return "Erreur : Le fichier est trop volumineux pour être utilisé comme contexte."
 
-        # Charge le contenu du fichier
+        # Charger le contenu du fichier
         with open(local_file_path, "r", encoding="utf-8", errors="replace") as f:
             context = f.read()
 
